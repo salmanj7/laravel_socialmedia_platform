@@ -1,0 +1,54 @@
+@extends('layouts.app')
+@section('content')
+<div class="container">
+    <form action="/post" enctype="multipart/form-data" method="post">
+        @csrf
+
+        <div class="row">
+            <div class="col-8 offset-2">
+
+                <div class="row">
+                    <h1>Add New Post</h1>
+                </div>
+                <div class="form-group row">
+                    <label for="caption" class="col-md-4 col-form-label">Post Caption</label>
+
+                    <input id="caption"
+                           type="text"
+                           class="form-control{{ $errors->has('caption') ? ' is-invalid' : '' }}"
+                           name="caption"
+                           value="{{ old('caption') }}"
+                           autocomplete="caption" autofocus>
+
+                    @if ($errors->has('caption'))
+                        <span class="invalid-feedback" role="alert">
+                            <strong>{{ $errors->first('caption') }}</strong>
+                        </span>
+                    @endif
+                </div>
+
+                <div class="row">
+                    <label for="file" class="col-md-4 col-form-label">Post Image</label>
+
+                    <input type="file" class="form-control-file" id="file" name="file">
+
+                    @if ($errors->has('file'))
+                        <strong>{{ $errors->first('file') }}</strong>
+                    @endif
+                </div>
+
+                <div class="row pt-4">
+                    <button class="btn btn-primary">Add New Post</button>
+                </div>
+
+            </div>
+        </div>
+    </form>
+
+
+
+</div>
+
+
+
+@endsection
